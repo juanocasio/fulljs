@@ -1,3 +1,3 @@
-import config from './config';
+import config, {nodeENV} from './config';
 
-console.log(config);
+console.log(config, nodeENV);
