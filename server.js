@@ -1,12 +1,21 @@
-import http from 'http';
+import config from './config';
+import express from 'express'
+import fs from 'fs';
 
-const server = http.createServer((req,res)=> {
-  res.write('Hello HTTP!\n');
-  setTimeout(() => {
-    res.write('I can stream!\n');
-    res.end();
-  }, 3000);
+const server = express();
+
+server.get('/', (req,res) => {
+  res.send('Hello Express');
 });
 
-server.listen(8080);
+// server.get('/about.html', (req,res) => {
+//   fs.readFile('./about.html', (err,data)=>{
+//     res.send(data.toString());
+//   });
+// });
 
+server.use(express.static('public'));
+
+server.listen(config.port, () =>{
+  console.log('Listening on port ', config.port);
+});
